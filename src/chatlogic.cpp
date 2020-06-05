@@ -11,6 +11,9 @@
 #include "graphedge.h"
 #include "graphnode.h"
 
+using std::copy;
+using std::move;
+
 ChatLogic::ChatLogic() {
   //// STUDENT CODE
   ////
@@ -25,6 +28,23 @@ ChatLogic::ChatLogic() {
   ////
   //// EOF STUDENT CODE
 }
+ChatLogic::ChatLogic(const ChatLogic &chat_logic) {
+  std::cout << "ChatLogic copy constructor" << std::endl;
+  copy(chat_logic._nodes.begin(), chat_logic._nodes.end(), _nodes.begin());
+  copy(chat_logic._edges.begin(), chat_logic._edges.end(), _edges.begin());
+  _currentNode = chat_logic._currentNode;
+  _chatBot = chat_logic._chatBot;
+  _panelDialog = chat_logic._panelDialog;
+};
+
+ChatLogic::ChatLogic(ChatLogic &&chat_logic) {
+  std::cout << "ChatLogic move constructor" << std::endl;
+  _nodes = move(chat_logic._nodes);
+  _edges = move(chat_logic._edges);
+  _currentNode = move(chat_logic._currentNode);
+  _chatBot = move(chat_logic._chatBot);
+  _panelDialog = move(chat_logic._panelDialog);
+};
 
 ChatLogic::~ChatLogic() {
   //// STUDENT CODE
@@ -46,6 +66,27 @@ ChatLogic::~ChatLogic() {
   ////
   //// EOF STUDENT CODE
 }
+ChatLogic &ChatLogic::operator=(const ChatLogic &chat_logic) {
+  std::cout << "ChatLogic copy constructor" << std::endl;
+  if (&chat_logic == this)
+    return *this;
+  copy(chat_logic._nodes.begin(), chat_logic._nodes.end(), _nodes.begin());
+  copy(chat_logic._edges.begin(), chat_logic._edges.end(), _edges.begin());
+  _currentNode = chat_logic._currentNode;
+  _chatBot = chat_logic._chatBot;
+  _panelDialog = chat_logic._panelDialog;
+};
+
+ChatLogic &ChatLogic::operator=(ChatLogic &&chat_logic) {
+  std::cout << "ChatLogic move constructor" << std::endl;
+  if (&chat_logic == this)
+    return *this;
+  _nodes = move(chat_logic._nodes);
+  _edges = move(chat_logic._edges);
+  _currentNode = move(chat_logic._currentNode);
+  _chatBot = move(chat_logic._chatBot);
+  _panelDialog = move(chat_logic._panelDialog);
+};
 
 template <typename T>
 void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens,
