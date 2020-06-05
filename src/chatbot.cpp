@@ -16,6 +16,23 @@ ChatBot::ChatBot() {
   _rootNode = nullptr;
 }
 
+// copy constructor
+ChatBot::ChatBot(const ChatBot &chat_bot) : ChatBot() {
+  std::cout << "ChatBot Copy Constructor" << std::endl;
+  _image = new wxBitmap(*(chat_bot._image)); // Call copy constructor of
+                                             // wxBitmap. Create object in heap.
+};
+
+ChatBot::ChatBot(ChatBot &&chat_bot) { // move constructor
+  std::cout << "ChatBot Move constructor" << std::endl;
+  _image = chat_bot._image;
+  _chatLogic = chat_bot._chatLogic;
+  _rootNode = chat_bot._rootNode;
+  chat_bot._image = nullptr;
+  chat_bot._chatLogic = nullptr;
+  chat_bot._rootNode = nullptr;
+};
+
 // constructor WITH memory allocation
 ChatBot::ChatBot(std::string filename) {
   std::cout << "ChatBot Constructor" << std::endl;
@@ -41,7 +58,39 @@ ChatBot::~ChatBot() {
 
 //// STUDENT CODE
 ////
+ChatBot &ChatBot::operator=(const ChatBot &chat_bot) // assignment operator
+{
+  std::cout << "ChatBot Assignment Operator" << std::endl;
+  if (&chat_bot == this) // Check assignment to itself.
+    return *this;
+  _chatLogic = chat_bot._chatLogic;
+  _rootNode = chat_bot._rootNode;
+  if (_image != NULL) {
+    delete _image;
+    _image = NULL;
+  }
+  _image = new wxBitmap(*(chat_bot._image));
+  return *this;
+}
 
+ChatBot &ChatBot::operator=(ChatBot &&chat_bot) // move assignment operator
+{
+  std::cout << "ChatBot Move Assignment Operator" << std::endl;
+  if (&chat_bot == this) // Check assignment to itself.
+    return *this;
+  _chatLogic = chat_bot._chatLogic;
+  _rootNode = chat_bot._rootNode;
+  if (_image != NULL) {
+    delete _image;
+    _image = NULL;
+  }
+  _image = chat_bot._image;
+
+  chat_bot._image = nullptr;
+  chat_bot._chatLogic = nullptr;
+  chat_bot._rootNode = nullptr;
+  return *this;
+}
 ////
 //// EOF STUDENT CODE
 
