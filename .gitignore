@@ -1,2 +1,6 @@
 build/
+*.py
+*.txt
+*.pdf
+*.vpd
 
