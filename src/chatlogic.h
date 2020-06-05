@@ -2,6 +2,7 @@
 #define CHATLOGIC_H_
 
 #include "chatgui.h"
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -10,13 +11,15 @@ class ChatBot;
 class GraphEdge;
 class GraphNode;
 
+using std::make_unique;
+
 class ChatLogic {
 private:
   //// STUDENT CODE
   ////
 
   // data handles (owned)
-  std::vector<GraphNode *> _nodes;
+  std::vector<std::unique_ptr<GraphNode>> _nodes;
   std::vector<GraphEdge *> _edges;
 
   ////
@@ -38,11 +41,13 @@ private:
 public:
   // constructor / destructor
   ChatLogic();
-  ChatLogic(const ChatLogic &chat_logic);
+  ChatLogic(const ChatLogic &chat_logic) =
+      delete; // ChatbotPanelDialog is exclusive resource.
   ChatLogic(ChatLogic &&chat_logic);
   ~ChatLogic();
 
-  ChatLogic &operator=(const ChatLogic &chat_logic);
+  ChatLogic &operator=(const ChatLogic &chat_logic) =
+      delete; // ChatbotPanelDialog is exclusive resource.
   ChatLogic &operator=(ChatLogic &&chat_logic);
   // getter / setter
   void SetPanelDialogHandle(ChatBotPanelDialog *panelDialog);
