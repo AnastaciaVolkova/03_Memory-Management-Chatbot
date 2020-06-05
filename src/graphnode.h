@@ -1,23 +1,23 @@
 #ifndef GRAPHNODE_H_
 #define GRAPHNODE_H_
 
+#include "chatbot.h"
 #include <string>
 #include <vector>
-#include "chatbot.h"
 
 // forward declarations
 class GraphEdge;
 
 class GraphNode {
- private:
+private:
   //// STUDENT CODE
   ////
 
   // data handles (owned)
-  std::vector<GraphEdge *> _childEdges;  // edges to subsequent nodes
+  std::vector<GraphEdge *> _childEdges; // edges to subsequent nodes
 
   // data handles (not owned)
-  std::vector<GraphEdge *> _parentEdges;  // edges to preceding nodes
+  std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes
   ChatBot *_chatBot;
 
   ////
@@ -27,7 +27,7 @@ class GraphNode {
   int _id;
   std::vector<std::string> _answers;
 
- public:
+public:
   // constructor / destructor
   GraphNode(int id);
   ~GraphNode();
@@ -40,7 +40,7 @@ class GraphNode {
   int GetNumberOfParents() { return _parentEdges.size(); }
 
   // proprietary functions
-  void AddToken(std::string token);  // add answers to list
+  void AddToken(std::string token); // add answers to list
   void AddEdgeToParentNode(GraphEdge *edge);
   void AddEdgeToChildNode(GraphEdge *edge);
 

@@ -1,10 +1,10 @@
+#include "chatbot.h"
 #include "chatgui.h"
+#include "chatlogic.h"
+#include <string>
 #include <wx/colour.h>
 #include <wx/filename.h>
 #include <wx/image.h>
-#include <string>
-#include "chatbot.h"
-#include "chatlogic.h"
 
 // size of chatbot window
 const int width = 414;
@@ -68,7 +68,7 @@ void ChatBotFrame::OnEnter(wxCommandEvent &WXUNUSED(event)) {
 }
 
 BEGIN_EVENT_TABLE(ChatBotFrameImagePanel, wxPanel)
-EVT_PAINT(ChatBotFrameImagePanel::paintEvent)  // catch paint events
+EVT_PAINT(ChatBotFrameImagePanel::paintEvent) // catch paint events
 END_EVENT_TABLE()
 
 ChatBotFrameImagePanel::ChatBotFrameImagePanel(wxFrame *parent)
@@ -100,7 +100,7 @@ void ChatBotFrameImagePanel::render(wxDC &dc) {
 }
 
 BEGIN_EVENT_TABLE(ChatBotPanelDialog, wxPanel)
-EVT_PAINT(ChatBotPanelDialog::paintEvent)  // catch paint events
+EVT_PAINT(ChatBotPanelDialog::paintEvent) // catch paint events
 END_EVENT_TABLE()
 
 ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
@@ -147,7 +147,7 @@ void ChatBotPanelDialog::AddDialogItem(wxString text, bool isFromUser) {
   _dialogSizer->Layout();
 
   // make scrollbar show up
-  this->FitInside();  // ask the sizer about the needed size
+  this->FitInside(); // ask the sizer about the needed size
   this->SetScrollRate(5, 5);
   this->Layout();
 

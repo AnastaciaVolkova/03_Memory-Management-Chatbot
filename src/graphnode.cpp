@@ -1,5 +1,5 @@
-#include "graphnode.h"
 #include "graphedge.h"
+#include "graphnode.h"
 
 GraphNode::GraphNode(int id) { _id = id; }
 
@@ -30,7 +30,7 @@ void GraphNode::MoveChatbotHere(ChatBot *chatbot) {
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode) {
   newNode->MoveChatbotHere(_chatBot);
-  _chatBot = nullptr;  // invalidate pointer at source
+  _chatBot = nullptr; // invalidate pointer at source
 }
 ////
 //// EOF STUDENT CODE

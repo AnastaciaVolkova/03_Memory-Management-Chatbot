@@ -3,11 +3,11 @@
 
 #include <wx/wx.h>
 
-class ChatLogic;  // forward declaration
+class ChatLogic; // forward declaration
 
 // middle part of the window containing the dialog between user and chatbot
 class ChatBotPanelDialog : public wxScrolledWindow {
- private:
+private:
   // control elements
   wxBoxSizer *_dialogSizer;
   wxBitmap _image;
@@ -20,7 +20,7 @@ class ChatBotPanelDialog : public wxScrolledWindow {
   ////
   //// EOF STUDENT CODE
 
- public:
+public:
   // constructor / destructor
   ChatBotPanelDialog(wxWindow *parent, wxWindowID id);
   ~ChatBotPanelDialog();
@@ -42,19 +42,19 @@ class ChatBotPanelDialog : public wxScrolledWindow {
 
 // dialog item shown in ChatBotPanelDialog
 class ChatBotPanelDialogItem : public wxPanel {
- private:
+private:
   // control elements
   wxStaticBitmap *_chatBotImg;
   wxStaticText *_chatBotTxt;
 
- public:
+public:
   // constructor / destructor
   ChatBotPanelDialogItem(wxPanel *parent, wxString text, bool isFromUser);
 };
 
 // frame containing all control elements
 class ChatBotFrame : public wxFrame {
- private:
+private:
   // control elements
   ChatBotPanelDialog *_panelDialog;
   wxTextCtrl *_userTextCtrl;
@@ -62,7 +62,7 @@ class ChatBotFrame : public wxFrame {
   // events
   void OnEnter(wxCommandEvent &WXUNUSED(event));
 
- public:
+public:
   // constructor / desctructor
   ChatBotFrame(const wxString &title);
 };
@@ -72,7 +72,7 @@ class ChatBotFrameImagePanel : public wxPanel {
   // control elements
   wxBitmap _image;
 
- public:
+public:
   // constructor / desctructor
   ChatBotFrameImagePanel(wxFrame *parent);
 
@@ -86,7 +86,7 @@ class ChatBotFrameImagePanel : public wxPanel {
 
 // wxWidgets app that hides main()
 class ChatBotApp : public wxApp {
- public:
+public:
   // events
   virtual bool OnInit();
 };
