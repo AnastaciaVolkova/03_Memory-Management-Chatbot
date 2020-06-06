@@ -27,10 +27,6 @@ ChatBot::ChatBot(const ChatBot &chat_bot) {
 
 ChatBot::ChatBot(ChatBot &&chat_bot) { // move constructor
   std::cout << "ChatBot Move constructor" << std::endl;
-  if (_image != NULL) {
-    delete _image;
-    _image = NULL;
-  }
   _image = chat_bot._image;
   _chatLogic = chat_bot._chatLogic;
   _rootNode = chat_bot._rootNode;
