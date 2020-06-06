@@ -6,14 +6,6 @@ using std::unique_ptr;
 
 GraphNode::GraphNode(int id) { _id = id; }
 
-GraphNode::~GraphNode() {
-  //// STUDENT CODE
-  ////
-
-  ////
-  //// EOF STUDENT CODE
-}
-
 void GraphNode::AddToken(std::string token) { _answers.push_back(token); }
 
 void GraphNode::AddEdgeToParentNode(GraphEdge *edge) {
@@ -21,7 +13,7 @@ void GraphNode::AddEdgeToParentNode(GraphEdge *edge) {
 }
 
 void GraphNode::AddEdgeToChildNode(unique_ptr<GraphEdge> &&edge) {
-  _childEdges.push_back(std::move(edge));
+  _childEdges.push_back(move(edge));
 }
 
 void GraphNode::MoveChatbotHere(unique_ptr<ChatBot> &&chatbot) {
@@ -30,18 +22,9 @@ void GraphNode::MoveChatbotHere(unique_ptr<ChatBot> &&chatbot) {
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode) {
-  newNode->MoveChatbotHere(std::move(_chatBot));
-  _chatBot = nullptr; // invalidate pointer at source
+  newNode->MoveChatbotHere(move(_chatBot));
 }
-////
-//// EOF STUDENT CODE
 
 GraphEdge *GraphNode::GetChildEdgeAtIndex(int index) {
-  //// STUDENT CODE
-  ////
-
   return _childEdges[index].get();
-
-  ////
-  //// EOF STUDENT CODE
 }
