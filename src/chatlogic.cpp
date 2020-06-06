@@ -15,45 +15,17 @@ using std::copy;
 using std::move;
 using std::unique_ptr;
 
-ChatLogic::ChatLogic() {
-  //// STUDENT CODE
-  ////
-
-  // create instance of chatbot
-  _chatBot = new ChatBot("../images/chatbot.png");
-
-  // add pointer to chatlogic so that chatbot answers can be passed on to the
-  // GUI
-  _chatBot->SetChatLogicHandle(this);
-
-  ////
-  //// EOF STUDENT CODE
-}
+ChatLogic::ChatLogic() : _chatBot(nullptr) {}
 
 ChatLogic::ChatLogic(ChatLogic &&chat_logic) {
   std::cout << "ChatLogic move constructor" << std::endl;
   _nodes = move(chat_logic._nodes);
   //_edges = move(chat_logic._edges);
   _currentNode = move(chat_logic._currentNode);
-  _chatBot = move(chat_logic._chatBot);
   _panelDialog = move(chat_logic._panelDialog);
 };
 
-ChatLogic::~ChatLogic() {
-  //// STUDENT CODE
-  ////
-
-  // delete chatbot instance
-  delete _chatBot;
-
-  // delete all edges
-  /*for (auto it = std::begin(_edges); it != std::end(_edges); ++it) {
-    delete *it;
-  }*/
-
-  ////
-  //// EOF STUDENT CODE
-}
+ChatLogic::~ChatLogic() {}
 
 ChatLogic &ChatLogic::operator=(ChatLogic &&chat_logic) {
   std::cout << "ChatLogic move constructor" << std::endl;
@@ -62,7 +34,6 @@ ChatLogic &ChatLogic::operator=(ChatLogic &&chat_logic) {
   _nodes = move(chat_logic._nodes);
   //_edges = move(chat_logic._edges);
   _currentNode = move(chat_logic._currentNode);
-  _chatBot = move(chat_logic._chatBot);
   _panelDialog = move(chat_logic._panelDialog);
 };
 
@@ -240,11 +211,12 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
   }
 
   // add chatbot to graph root node
-  _chatBot->SetRootNode(rootNode);
-  rootNode->MoveChatbotHere(_chatBot);
-
-  ////
-  //// EOF STUDENT CODE
+  unique_ptr<ChatBot> chatBot = make_unique<ChatBot>("../images/chatbot.png");
+  _chatBot = chatBot.get();
+  chatBot->SetChatLogicHandle(this);
+  chatBot->SetRootNode(rootNode);
+  rootNode->MoveChatbotHere(std::move(chatBot));
+  _chatBot->SetChatLogicHandle(this);
 }
 
 void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog) {
