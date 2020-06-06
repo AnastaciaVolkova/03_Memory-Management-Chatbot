@@ -157,7 +157,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
               unique_ptr<GraphEdge> edge = make_unique<GraphEdge>(id);
               edge->SetChildNode(childNode->get());
               edge->SetParentNode(parentNode->get());
-              //_edges.push_back(edge);
 
               // find all keywords for current node
               AddAllTokensToElement("KEYWORD", tokens, *edge);
@@ -194,11 +193,11 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
   }
 
   // add chatbot to graph root node
-  unique_ptr<ChatBot> chatBot = make_unique<ChatBot>("../images/chatbot.png");
-  _chatBot = chatBot.get();
-  chatBot->SetChatLogicHandle(this);
-  chatBot->SetRootNode(rootNode);
-  rootNode->MoveChatbotHere(std::move(chatBot));
+  unique_ptr<ChatBot> cb = make_unique<ChatBot>("../images/chatbot.png");
+  _chatBot = cb.get();
+  cb->SetChatLogicHandle(this);
+  cb->SetRootNode(rootNode);
+  rootNode->MoveChatbotHere(std::move(cb));
   _chatBot->SetChatLogicHandle(this);
 }
 
