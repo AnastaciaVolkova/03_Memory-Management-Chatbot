@@ -31,12 +31,6 @@ public:
   ChatBot &operator=(const ChatBot &chat_bot); // assignment operator
   ChatBot &operator=(ChatBot &&chat_bot);      // move assignment operator
 
-  //// STUDENT CODE
-  ////
-
-  ////
-  //// EOF STUDENT CODE
-
   // getters / setters
   void SetCurrentNode(GraphNode *node);
   void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }

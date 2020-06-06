@@ -17,30 +17,33 @@ ChatBot::ChatBot() {
 }
 
 // copy constructor
-ChatBot::ChatBot(const ChatBot &chat_bot) : ChatBot() {
+ChatBot::ChatBot(const ChatBot &chat_bot) {
   std::cout << "ChatBot Copy Constructor" << std::endl;
+  _chatLogic = chat_bot._chatLogic;
+  _rootNode = chat_bot._rootNode;
   _image = new wxBitmap(*(chat_bot._image)); // Call copy constructor of
                                              // wxBitmap. Create object in heap.
 };
 
 ChatBot::ChatBot(ChatBot &&chat_bot) { // move constructor
   std::cout << "ChatBot Move constructor" << std::endl;
+  if (_image != NULL) {
+    delete _image;
+    _image = NULL;
+  }
   _image = chat_bot._image;
   _chatLogic = chat_bot._chatLogic;
   _rootNode = chat_bot._rootNode;
+  // Invalidate date of object to move.
   chat_bot._image = nullptr;
   chat_bot._chatLogic = nullptr;
   chat_bot._rootNode = nullptr;
 };
 
 // constructor WITH memory allocation
-ChatBot::ChatBot(std::string filename) {
-  std::cout << "ChatBot Constructor" << std::endl;
-
-  // invalidate data handles
-  _chatLogic = nullptr;
-  _rootNode = nullptr;
-
+ChatBot::ChatBot(std::string filename)
+    : _chatLogic(nullptr), _rootNode(nullptr) {
+  std::cout << "ChatBot Default Constructor" << std::endl;
   // load image into heap memory
   _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
 }
@@ -56,8 +59,6 @@ ChatBot::~ChatBot() {
   }
 }
 
-//// STUDENT CODE
-////
 ChatBot &ChatBot::operator=(const ChatBot &chat_bot) // assignment operator
 {
   std::cout << "ChatBot Assignment Operator" << std::endl;
@@ -86,13 +87,12 @@ ChatBot &ChatBot::operator=(ChatBot &&chat_bot) // move assignment operator
   }
   _image = chat_bot._image;
 
+  // Invalidate data of object to move.
   chat_bot._image = nullptr;
   chat_bot._chatLogic = nullptr;
   chat_bot._rootNode = nullptr;
   return *this;
 }
-////
-//// EOF STUDENT CODE
 
 void ChatBot::ReceiveMessageFromUser(std::string message) {
   // loop over all edges and keywords and compute Levenshtein distance to query
