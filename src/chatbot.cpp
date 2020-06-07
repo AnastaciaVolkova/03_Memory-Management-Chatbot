@@ -10,7 +10,7 @@
 
 // constructor WITHOUT memory allocation
 ChatBot::ChatBot() {
-  std::cout << "ChatBot Default Constructor" << std::endl;
+  std::cout << "ChatBot Default Constructor\n";
   // invalidate data handles
   _image = nullptr;
   _chatLogic = nullptr;
@@ -19,7 +19,7 @@ ChatBot::ChatBot() {
 
 // copy constructor
 ChatBot::ChatBot(const ChatBot &chat_bot) {
-  std::cout << "ChatBot Copy Constructor" << std::endl;
+  std::cout << "ChatBot Copy Constructor\n";
   _chatLogic = chat_bot._chatLogic;
   _rootNode = chat_bot._rootNode;
   _image = new wxBitmap(*(chat_bot._image)); // Call copy constructor of
@@ -27,7 +27,7 @@ ChatBot::ChatBot(const ChatBot &chat_bot) {
 };
 
 ChatBot::ChatBot(ChatBot &&chat_bot) { // move constructor
-  std::cout << "ChatBot Move constructor" << std::endl;
+  std::cout << "ChatBot Move constructor\n";
   _image = chat_bot._image;
   _chatLogic = chat_bot._chatLogic;
   _chatLogic->SetChatbotHandle(this);
@@ -41,13 +41,13 @@ ChatBot::ChatBot(ChatBot &&chat_bot) { // move constructor
 // constructor WITH memory allocation
 ChatBot::ChatBot(std::string filename)
     : _chatLogic(nullptr), _rootNode(nullptr) {
-  std::cout << "ChatBot Default Constructor" << std::endl;
+  std::cout << "ChatBot Default Constructor\n";
   // load image into heap memory
   _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
 }
 
 ChatBot::~ChatBot() {
-  std::cout << "ChatBot Destructor" << std::endl;
+  std::cout << "ChatBot Destructor\n";
 
   // deallocate heap memory
   if (_image != NULL) // Attention: wxWidgets used NULL and not nullptr
@@ -59,7 +59,7 @@ ChatBot::~ChatBot() {
 
 ChatBot &ChatBot::operator=(const ChatBot &chat_bot) // assignment operator
 {
-  std::cout << "ChatBot Assignment Operator" << std::endl;
+  std::cout << "ChatBot Assignment Operator\n";
   if (&chat_bot == this) // Check assignment to itself.
     return *this;
   _chatLogic = chat_bot._chatLogic;
@@ -74,7 +74,7 @@ ChatBot &ChatBot::operator=(const ChatBot &chat_bot) // assignment operator
 
 ChatBot &ChatBot::operator=(ChatBot &&chat_bot) // move assignment operator
 {
-  std::cout << "ChatBot Move Assignment Operator" << std::endl;
+  std::cout << "ChatBot Move Assignment Operator\n";
   if (&chat_bot == this) // Check assignment to itself.
     return *this;
   _chatLogic = chat_bot._chatLogic;
