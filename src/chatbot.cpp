@@ -10,6 +10,7 @@
 
 // constructor WITHOUT memory allocation
 ChatBot::ChatBot() {
+  std::cout << "ChatBot Default Constructor" << std::endl;
   // invalidate data handles
   _image = nullptr;
   _chatLogic = nullptr;
@@ -29,6 +30,7 @@ ChatBot::ChatBot(ChatBot &&chat_bot) { // move constructor
   std::cout << "ChatBot Move constructor" << std::endl;
   _image = chat_bot._image;
   _chatLogic = chat_bot._chatLogic;
+  _chatLogic->SetChatbotHandle(this);
   _rootNode = chat_bot._rootNode;
   // Invalidate date of object to move.
   chat_bot._image = nullptr;
@@ -76,6 +78,7 @@ ChatBot &ChatBot::operator=(ChatBot &&chat_bot) // move assignment operator
   if (&chat_bot == this) // Check assignment to itself.
     return *this;
   _chatLogic = chat_bot._chatLogic;
+  _chatLogic->SetChatbotHandle(this);
   _rootNode = chat_bot._rootNode;
   if (_image != NULL) {
     delete _image;
