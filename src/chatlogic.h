@@ -34,7 +34,6 @@ public:
   ChatLogic();
   ChatLogic(const ChatLogic &chat_logic) =
       delete; // ChatbotPanelDialog is exclusive resource.
-  ChatLogic(ChatLogic &&chat_logic);
   ~ChatLogic();
 
   ChatLogic &operator=(const ChatLogic &chat_logic) =

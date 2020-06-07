@@ -18,13 +18,6 @@ using std::unique_ptr;
 
 ChatLogic::ChatLogic() : _chatBot(nullptr) {}
 
-ChatLogic::ChatLogic(ChatLogic &&chat_logic) {
-  std::cout << "ChatLogic move constructor" << std::endl;
-  _nodes = move(chat_logic._nodes);
-  _currentNode = move(chat_logic._currentNode);
-  _panelDialog = move(chat_logic._panelDialog);
-};
-
 ChatLogic::~ChatLogic() {}
 
 ChatLogic &ChatLogic::operator=(ChatLogic &&chat_logic) {
