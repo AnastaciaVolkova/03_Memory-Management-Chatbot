@@ -20,15 +20,6 @@ ChatLogic::ChatLogic() : _chatBot(nullptr) {}
 
 ChatLogic::~ChatLogic() {}
 
-ChatLogic &ChatLogic::operator=(ChatLogic &&chat_logic) {
-  std::cout << "ChatLogic move constructor" << std::endl;
-  if (&chat_logic == this)
-    return *this;
-  _nodes = move(chat_logic._nodes);
-  _currentNode = move(chat_logic._currentNode);
-  _panelDialog = move(chat_logic._panelDialog);
-};
-
 template <typename T>
 void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens,
                                       T &element) {

@@ -38,7 +38,6 @@ public:
 
   ChatLogic &operator=(const ChatLogic &chat_logic) =
       delete; // ChatbotPanelDialog is exclusive resource.
-  ChatLogic &operator=(ChatLogic &&chat_logic);
   // getter / setter
   void SetPanelDialogHandle(ChatBotPanelDialog *panelDialog);
   void SetChatbotHandle(ChatBot *chatbot);
