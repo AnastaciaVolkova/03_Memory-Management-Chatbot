@@ -12,7 +12,7 @@ void GraphNode::AddEdgeToParentNode(GraphEdge *edge) {
   _parentEdges.push_back(edge);
 }
 
-void GraphNode::AddEdgeToChildNode(unique_ptr<GraphEdge> &&edge) {
+void GraphNode::AddEdgeToChildNode(unique_ptr<GraphEdge> edge) {
   _childEdges.push_back(move(edge));
 }
 
